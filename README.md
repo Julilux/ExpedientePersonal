@@ -19,18 +19,16 @@ ExpedientePersonal/
 ---
 
 ### ▶️ Backend
-
-cd Backend
-yarn install
-node server.js
+- cd Backend
+- yarn install
+- node server.js
 
 ### Asegurarse de tener configurado .env con los datos de tu instancia SQL Server.
 
 ### ▶️ Frontend
-
-cd Frontend
-yarn install
-yarn start
+- cd Frontend
+- yarn install
+- yarn start
 
 ---
 
