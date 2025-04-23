@@ -1,11 +1,10 @@
 # Proyecto ExpedientePersonal
-
-Sistema para la administración del expediente de personal, desarrollado como parte de una entrega académica.  
-Incluye APIs REST en Node.js y un frontend en React + Redux.
-
-ExpedientePersonal/ 
-├── Backend/ → API en Node.js + Sequelize + SQL Server 
-└── Frontend/ → Interfaz web en React + Redux
+- Sistema para la administración del expediente de personal, desarrollado como parte de una entrega académica.  
+- Incluye APIs REST en Node.js y un frontend en React + Redux.
+  
+- ExpedientePersonal/ 
+- ├── Backend/ → API en Node.js + Sequelize + SQL Server 
+- └── Frontend/ → Interfaz web en React + Redux
 
 ---
 
