@@ -3,9 +3,9 @@ const sequelize = require("../config/database");
 
 const Empleado = sequelize.define("Empleado", {
   IdEmpleado: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.STRING(50),
     primaryKey: true,
-    autoIncrement: true,
+    allowNull: false,
   },
   Nombre: {
     type: DataTypes.STRING(100),

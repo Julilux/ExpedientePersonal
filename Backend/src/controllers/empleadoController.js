@@ -7,13 +7,13 @@ const { registrarEmpleado } = require("../services/empleadoService");
 
 const crearEmpleado = async (req, res) => {
   try {
-    const { Nombre, Puesto, Direccion } = req.body;
+    const { IdEmpleado, Nombre, Puesto, Direccion } = req.body;
 
-    if (!Nombre || !Puesto) {
-      return res.status(400).json({ error: "Los campos Nombre y Puesto son obligatorios." });
+    if (!IdEmpleado || !Nombre || !Puesto) {
+      return res.status(400).json({ error: "Los campos IdEmpleado, Nombre y Puesto son obligatorios." });
     }
 
-    const empleado = await registrarEmpleado({ Nombre, Puesto, Direccion });
+    const empleado = await registrarEmpleado({ IdEmpleado, Nombre, Puesto, Direccion });
 
     res.status(201).json({
       mensaje: "Empleado registrado exitosamente",

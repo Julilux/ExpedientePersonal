@@ -1,4 +1,4 @@
-const Usuario = require("../models/Usuario");
+const { Usuario } = require("../models");
 const bcrypt = require("bcrypt");
 
 /**
@@ -13,7 +13,6 @@ async function autenticarUsuario(nombreUsuario, contraseniaPlano) {
     const usuario = await Usuario.findOne({
       where: {
         Nombre: nombreUsuario,
-        Estado: "Activo",
       }
     });
 
@@ -21,11 +20,39 @@ async function autenticarUsuario(nombreUsuario, contraseniaPlano) {
       return { Usuario: nombreUsuario, Resultado: false };
     }
 
+    if (usuario.Estado === "Bloqueado") {
+      return { Usuario: nombreUsuario, Resultado: false, Bloqueado: true };
+    }
+
     const coincide = await bcrypt.compare(contraseniaPlano, usuario.Contrasenia);
+
+    if (!coincide) {
+      // Incrementar intentos fallidos
+      const nuevosIntentos = (usuario.IntentosFallidos || 0) + 1;
+
+      if (nuevosIntentos >= 3) {
+        await usuario.update({
+          IntentosFallidos: nuevosIntentos,
+          Estado: "Bloqueado"
+        });
+        return { Usuario: usuario.Nombre, Resultado: false, Bloqueado: true };
+      } else {
+        await usuario.update({
+          IntentosFallidos: nuevosIntentos
+        });
+      }
+      
+      return { Usuario: usuario.Nombre, Resultado: false };
+    }
+
+    // Si coincide, reiniciar intentos
+    await usuario.update({
+      IntentosFallidos: 0
+    });
 
     return {
       Usuario: usuario.Nombre,
-      Resultado: coincide
+      Resultado: true
     };
   } catch (error) {
     console.error("❌ Error al autenticar usuario:", error.message);

@@ -35,16 +35,53 @@ async function obtenerOferentesListos(idPuesto) {
 
     const oferentes = await Oferente.findAll({
       where: { IdOferente: { [Op.in]: idsFinales } },
-      attributes: ["IdOferente", "Nombre"]
+      attributes: ["IdOferente", "Nombre", "Empleado"]
     });
 
-    return oferentes;
+    // Transformar la respuesta para devolver "Nombre" y "Identificacion"
+    const respuesta = oferentes.map(oferente => ({
+      Nombre: oferente.Nombre,
+      Identificacion: oferente.IdOferente,
+      Empleado: oferente.Empleado
+    }));
+
+    return respuesta;
   } catch (error) {
     console.error("❌ Error en obtenerOferentesListos:", error);
     throw error;
   }
 }
 
+async function obtenerDetalleOferente(idOferente) {
+  try {
+    const oferente = await Oferente.findByPk(idOferente);
+
+    if (!oferente) {
+      return null;
+    }
+
+    return oferente;
+  } catch (error) {
+    console.error("❌ Error en obtenerDetalleOferente:", error);
+    throw error;
+  }
+}
+
+async function obtenerTodosOferentes() {
+  try {
+    const oferentes = await Oferente.findAll({
+      attributes: ["IdOferente", "Nombre", "TipoIdentificacion", "Direccion", "FechaNacimiento", "EstadoCivil", "Nacionalidad"]
+    });
+
+    return oferentes;
+  } catch (error) {
+    console.error("❌ Error en obtenerTodosOferentes:", error);
+    throw error;
+  }
+}
+
 module.exports = {
   obtenerOferentesListos,
+  obtenerDetalleOferente,
+  obtenerTodosOferentes,
 };

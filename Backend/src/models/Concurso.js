@@ -1,8 +1,8 @@
 const { DataTypes } = require("sequelize");
 const sequelize = require("../config/database");
 
-const Puesto = sequelize.define("Puesto", {
-  IdPuesto: {
+const Concurso = sequelize.define("Concurso", {
+  IdConcurso: {
     type: DataTypes.INTEGER,
     primaryKey: true,
     autoIncrement: true,
@@ -11,21 +11,21 @@ const Puesto = sequelize.define("Puesto", {
     type: DataTypes.STRING(100),
     allowNull: false,
   },
-  Salario: {
-    type: DataTypes.DECIMAL(10, 2),
+  FechaInicio: {
+    type: DataTypes.DATEONLY,
     allowNull: true,
   },
-  IdJefatura: {
-    type: DataTypes.INTEGER,
+  FechaFin: {
+    type: DataTypes.DATEONLY,
     allowNull: true,
   },
-  Disponible: {
-    type: DataTypes.BOOLEAN,
-    allowNull: false,
+  Estado: {
+    type: DataTypes.STRING(50),
+    allowNull: true,
   }
 }, {
-  tableName: "Puesto",
-  timestamps: false
+  tableName: "Concurso",
+  timestamps: false,
 });
 
-module.exports = Puesto;
+module.exports = Concurso;

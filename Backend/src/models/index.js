@@ -1,20 +1,22 @@
 const sequelize = require("../config/database");
 
-const Puesto = require("./Puesto");
+const Concurso = require("./Concurso");
+const Empleado = require("./Empleado");
+const ExpLaboral = require("./ExpLaboral");
 const Oferente = require("./Oferente");
 const OferenteConcurso = require("./OferenteConcurso");
 const Preparacion = require("./Preparacion");
-const ExpLaboral = require("./ExpLaboral");
-const Empleado = require("./Empleado");
+const Puesto = require("./Puesto");
 const Usuario = require("./Usuario");
 
 module.exports = {
   sequelize,
-  Puesto,
+  Concurso,
+  Empleado,
+  ExpLaboral,
   Oferente,
   OferenteConcurso,
   Preparacion,
-  ExpLaboral,
-  Empleado,
+  Puesto,
   Usuario,
 };
